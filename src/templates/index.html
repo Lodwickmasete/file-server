@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/style.css">
+    <title>File System</title>
+</head>
+<body>
+    <!-- Breadcrumb Navigation -->
+    <div class="breadcrumb">
+        {% for breadcrumb in breadcrumbs %}
+            <a href="{{ breadcrumb.path }}" class="breadcrumb-item">{{ breadcrumb.name }}</a>
+        {% endfor %}
+    </div>
+
+    <main>
+        {% if files %}
+            <ul class="file-list">
+                {% for file in files %}
+                    <li class="file-item">
+                        <a href="{{ file.path }}" class="file-link">
+                            <div class="icon">
+                                {% if file.is_dir %}
+                                    <img src="/static/folder.svg" alt="Folder Icon">
+                                {% else %}
+                                    <img src="/static/pdf.png" alt="File Icon">
+                                {% endif %}
+                            </div>
+                            <span class="file-name">{{ file.name }}</span>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="empty-message">This folder is empty.</p>
+        {% endif %}
+    </main>
+</body>
+</html>
